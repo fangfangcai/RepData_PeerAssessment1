@@ -21,6 +21,8 @@ StepsPerDay <- aggregate(steps ~ date, data = activity, FUN = sum)
 hist(StepsPerDay$steps)
 ```
 
+![plot 1](Figures/hist1.png)
+
 2. Calculate and report the **mean** and **median** total number of steps taken per day
 
 Code:
@@ -28,9 +30,17 @@ Code:
 mean(StepsPerDay$steps)
 ```
 
+```
+## [1] 10766
+```
+
 Code:
 ```{r}
 median(StepsPerDay$steps)
+```
+
+```
+## [1] 10765
 ```
 
 ## What is the average daily activity pattern?
@@ -43,11 +53,18 @@ StepsInterval <- aggregate(steps ~ interval, data = activity, FUN = mean)
 plot(StepsInterval, type = "l")
 ```
 
+
+![plot 2](Figures/timeseries1.png) 
+
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 Code:
 ```{r}
 StepsInterval$interval[which.max(StepsInterval$steps)]
+```
+
+```
+## [1] 835
 ```
 
 ## Imputing missing values
@@ -57,6 +74,10 @@ StepsInterval$interval[which.max(StepsInterval$steps)]
 Code:
 ```{r}
 sum(is.na(activity))
+```
+
+```
+## [1] 2304
 ```
 
 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
@@ -82,14 +103,24 @@ StepsPerDay <- aggregate(steps ~ date, data = activity, FUN = sum)
 hist(StepsPerDay$steps)
 ```
 
+![plot 3](Figures/hist2.png)
+
 Code:
 ```{r}
 mean(StepsPerDay$steps)
 ```
 
+```
+## [1] 10766
+```
+
 Code:
 ```{r}
 median(StepsPerDay$steps)
+```
+
+```
+## [1] 10766
 ```
 
 The values differ from the estimate from the first part. There is little impact of imputing missing data on the estimates of the total daily number of steps. 
@@ -124,3 +155,5 @@ for (type in c("weekend", "weekday")) {
     plot(StepsType, type = "l", main = type)
 }
 ```
+
+![plot 4](Figures/panel1.png)
