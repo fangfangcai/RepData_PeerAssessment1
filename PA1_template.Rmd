@@ -7,6 +7,7 @@ output: html_document
 ## Loading and preprocessing the data
 
 ```{r}
+unzip("repdata-data-activity.zip")
 activity <- read.csv("activity.csv")
 ```
 
@@ -20,11 +21,6 @@ StepsPerDay <- aggregate(steps ~ date, data = activity, FUN = sum)
 hist(StepsPerDay$steps)
 ```
 
-Histogram:
-```{r, echo=FALSE}
-hist(StepsPerDay$steps)
-``` 
-
 2. Calculate and report the **mean** and **median** total number of steps taken per day
 
 Code:
@@ -32,18 +28,8 @@ Code:
 mean(StepsPerDay$steps)
 ```
 
-Mean:
-```{r, echo=FALSE}
-mean(StepsPerDay$steps)
-```
-
 Code:
 ```{r}
-median(StepsPerDay$steps)
-```
-
-Median:
-```{r, echo=FALSE}
 median(StepsPerDay$steps)
 ```
 
@@ -57,20 +43,10 @@ StepsInterval <- aggregate(steps ~ interval, data = activity, FUN = mean)
 plot(StepsInterval, type = "l")
 ```
 
-Time series plot:
-```{r, echo=FALSE}
-plot(StepsInterval, type = "l")
-```
-
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 Code:
 ```{r}
-StepsInterval$interval[which.max(StepsInterval$steps)]
-```
-
-5-minute interval that contains maximum number of steps:
-```{r, echo=FALSE}
 StepsInterval$interval[which.max(StepsInterval$steps)]
 ```
 
@@ -80,11 +56,6 @@ StepsInterval$interval[which.max(StepsInterval$steps)]
 
 Code:
 ```{r}
-sum(is.na(activity))
-```
-
-Number of NA:
-```{r, echo=FALSE}
 sum(is.na(activity))
 ```
 
@@ -111,28 +82,13 @@ StepsPerDay <- aggregate(steps ~ date, data = activity, FUN = sum)
 hist(StepsPerDay$steps)
 ```
 
-Histogram:
-```{r, echo=FALSE}
-hist(StepsPerDay$steps)
-``` 
-
 Code:
 ```{r}
 mean(StepsPerDay$steps)
 ```
 
-Mean:
-```{r, echo=FALSE}
-mean(StepsPerDay$steps)
-```
-
 Code:
 ```{r}
-median(StepsPerDay$steps)
-```
-
-Median:
-```{r, echo=FALSE}
 median(StepsPerDay$steps)
 ```
 
@@ -162,15 +118,6 @@ activity$WeekdayOrWeekend <- as.factor(sapply(activity$Day, WeekdayOrWeekend))
 
 Code:
 ```{r}
-par(mfrow = c(2, 1))
-for (type in c("weekend", "weekday")) {
-    StepsType <- aggregate(steps ~ interval, data = activity, subset = activity$WeekdayOrWeekend == type, FUN = mean)
-    plot(StepsType, type = "l", main = type)
-}
-```
-
-Plot:
-```{r, echo=FALSE}
 par(mfrow = c(2, 1))
 for (type in c("weekend", "weekday")) {
     StepsType <- aggregate(steps ~ interval, data = activity, subset = activity$WeekdayOrWeekend == type, FUN = mean)
